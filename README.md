@@ -17,20 +17,15 @@ Your job will be to implement both the server and a temperature sensor (called P
 *  http://localhost:port/temp/average
 *     o GET:Shouldretrievetheaveragesubmission
 *  http://localhost:port/temp/{device_id}
-*     o GET: Should retrieve all values for the requested device ID. Return a 404 error if the
-device ID is not found. You should not include the device_id in the results.
+*     o GET: Should retrieve all values for the requested device ID. Return a 404 error if the device ID is not found. You should not include the device_id in the results.
 *  http://localhost:port/temp/{device_id}/latest
-*     o GET: Should retrieve the latest submission for that device. The response should not
-include the device_id
+*     o GET: Should retrieve the latest submission for that device. The response should not include the device_id
 *  http://localhost:port/temp/{device_id}/highest
-*     o GET: Should retrieve the highest submission for that device. The response should not
-include the device_id
+*     o GET: Should retrieve the highest submission for that device. The response should not include the device_id
 *  http://localhost:port/temp/{device_id}/lowest
-*     o GET: Should retrieve the lowest submission for that device. The response should not
-include the device_id
+*     o GET: Should retrieve the lowest submission for that device. The response should not include the device_id
 *  http://localhost:port/temp/{device_id}/average
-*     o GET: Should retrieve the average submission for that device. The response should not
-include the device_id
+*     o GET: Should retrieve the average submission for that device. The response should not include the device_id
 
 # SET UP:
 First, make sure you have Node and NPM installed
