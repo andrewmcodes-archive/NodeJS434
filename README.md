@@ -39,7 +39,7 @@ Then, you need the following packages from npm. Run the following commands in te
 * npm install -g nodemon
 * npm install -g express
 * npm install -g mongoose
-
+* npm install -g lodash
 
 # Other Software:
 * Postman - Allows you to specify request type and send data to DB
