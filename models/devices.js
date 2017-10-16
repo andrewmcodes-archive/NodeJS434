@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const DeviceSchema = new Schema({
     device_id: {
-        type: Schema.Types.ObjectId,
+        type: String,
         reqired: [true, 'Device id field is required']
     },
     timestamp: {

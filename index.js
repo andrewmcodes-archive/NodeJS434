@@ -30,7 +30,7 @@ app.use('/api',require('./routes/api'));
 //error handling
 app.use(function(err, req, res, next){
      //attachs error code 422
-     res.status(422).send({error: err.message});
+     res.sendStatus(422).send({error: err.message});
 });
 
 // listen for set up variable in enviornment or port 4000

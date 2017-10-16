@@ -1,13 +1,7 @@
-/*
-Device.find({ temperature: /^75/ }, callback);
-This performs a search for all documents with a temperature property that begins with "75" 
-and returns the result as an array of devices to the callback.
-*/
-
 const express = require('express');
 const router = express.Router();
 const Device = require('../models/devices');
-
+var _ = require('lodash');
 //Should retrieve all values in the form of a JSON Array
 router.get('/temp', function(req,res, next){
     // res.send({type: 'GET'});
@@ -27,22 +21,39 @@ router.post('/temp', function(req,res, next){
 
 //Should retrieve the most recent submission
 router.get('/temp/latest',function(req,res){
-    res.send({type:'GET'});
+    Device.find(function (err, devices) {
+        if (err) return console.error(err);
+        var ordered = _.orderBy(devices, ['timestamp']);
+        res.send(ordered[0]);
+      })
     });
 
 //Should retrieve the highest submission
 router.get('/temp/highest',function(req,res){
-    res.send({type:'GET'});
+    Device.find(function (err, devices) {
+        if (err) return console.error(err);
+        var ordered = _.orderBy(devices, ['temperature'],['desc']);
+        res.send(ordered[0]);
+      })
     });
 
 //Should retrieve the lowest submission
 router.get('/temp/lowest',function(req,res){
-    res.send({type:'GET'});
+    Device.find(function (err, devices) {
+        if (err) return console.error(err);
+        var ordered = _.orderBy(devices, ['temperature'],['asc']);
+        res.send(ordered[0]);
+      })
 });
 
 //Should retrieve the average submission
 router.get('/temp/average',function(req,res){
-    res.send({type:'GET'});
+    Device.find(function (err, devices) {
+        if (err) return console.error(err);
+        var map = _.map(devices,'temperature');
+        var mean = _.mean(map);
+        res.send(String(mean));
+      })
 });
 
 //Should retrieve all values for the requested device ID. Return a 404 error if the
