@@ -27,20 +27,11 @@ Your job will be to implement both the server and a temperature sensor (called P
 *  http://localhost:port/temp/{device_id}/average
 *     o GET: Should retrieve the average submission for that device. The response should not include the device_id
 
-# SET UP:
-First, make sure you have Node and NPM installed
-* node -v — returns node version in terminal
+# Set Up
+This project utilizes a MongoDB server. First, start the mongoDB server, then start node index.js. If we need to demonstrate, please 
+let Andrew know (am5648@uncw.edu). All dependencies are listed in package.json. 
 
-Next, download and install MongoDB. You must have the MongoDB server running in the background when testing 
-* mongod - starts MongoDB server in terminal
-
-Then, you need the following packages from npm. Run the following commands in terminal:
-* npm install -g body-parser
-* npm install -g nodemon
-* npm install -g express
-* npm install -g mongoose
-* npm install -g lodash
-
-# Other Software:
-* Postman - Allows you to specify request type and send data to DB
-* Robo3t - Allows you to see visualization of MongoDB server
+Group Members: 
+Andrew Mason
+Doug Devaul
+Nanxi Che

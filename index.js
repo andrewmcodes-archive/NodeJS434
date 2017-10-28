@@ -18,9 +18,6 @@ db.once('open', function callback () {
     console.log('Connect to MongoDB: Successful');
 });
 
-//Servers static express file
-app.use(express.static('public'));
-
 //Parse JSON Data
 app.use(bodyParser.json());
 
@@ -33,8 +30,6 @@ app.use(router);
 
 //Should retrieve all values in the form of a JSON Array
 router.get('/temp', function(req,res, next){
-    // res.send({type: 'GET'});
-    // res.send(device);
     Device.find(function (err, devices) {
         if (err) throw err;
         res.send(devices);
@@ -90,7 +85,7 @@ router.get('/temp/average',function(req,res){
 router.get('/temp/:id',function(req,res, next){
     z = req.params.id;
     Device.find({ device_id : z }, function (err, devices) {
-        if (err) throw err;
+        if (!devices) {return res.status(404).send('Item Not Found')   }
         res.send(devices);
         })
     
@@ -101,7 +96,7 @@ router.get('/temp/:id',function(req,res, next){
 router.get('/temp/:id/latest',function(req,res){
     z = req.params.id;
     Device.find({ device_id : z }, function (err, devices) {
-        if (err) throw err;
+        if (!devices) {return res.status(404).send('Item Not Found')   }
         var ordered = _.orderBy(devices, ['timestamp']);
         res.send(ordered[0]);
         })
@@ -112,7 +107,7 @@ router.get('/temp/:id/latest',function(req,res){
 router.get('/temp/:id/highest',function(req,res){
     z = req.params.id;
     Device.find({ device_id : z }, function (err, devices) {
-        if (err) throw err;
+        if (!devices) {return res.status(404).send('Item Not Found')   }
         var ordered = _.orderBy(devices, ['timestamp'],['desc']);
         res.send(ordered[0]);
         })
@@ -123,7 +118,7 @@ router.get('/temp/:id/highest',function(req,res){
 router.get('/temp/:id/lowest',function(req,res){
     z = req.params.id;
     Device.find({ device_id : z }, function (err, devices) {
-        if (err) throw err;
+        if (!devices) {return res.status(404).send('Item Not Found')   }
         var ordered = _.orderBy(devices, ['timestamp'],['asc']);
         res.send(ordered[0]);
         })
@@ -134,7 +129,7 @@ router.get('/temp/:id/lowest',function(req,res){
 router.get('/temp/:id/average',function(req,res){
     z = req.params.id;
     Device.find({ device_id : z }, function (err, devices) {
-        if (err) throw err;
+        if (!devices) {return res.status(404).send('Item Not Found')   }
     var map = _.map(devices,'temperature');
     var mean = _.mean(map);
     res.send(String(mean));
@@ -149,9 +144,6 @@ app.use(function(err, req, res, next){
      //attachs error code 422
      res.sendStatus(422).send({error: err.message});
 });
-
-
-
 
 // listen for set up variable in enviornment or port 4000
 app.listen(process.env.port || 4000, function(){
